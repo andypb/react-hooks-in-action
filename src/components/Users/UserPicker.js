@@ -6,9 +6,15 @@ export default function UserPicker () {
 
   useEffect(() => {
 
-    fetch("http://localhost:3001/users")
-      .then(resp => resp.json())
-      .then(data => setUsers(data));
+    // fetch("http://localhost:3001/users")
+    //   .then(resp => resp.json())
+    //   .then(data => setUsers(data));
+
+    (async() => {
+      const resp = await fetch("http://localhost:3001/users");
+      const data = await resp.json();
+      setUsers(data);
+    })();
 
   }, []);
 

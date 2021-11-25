@@ -2,18 +2,11 @@ import {useState, useEffect} from 'react';
 import Spinner from "../UI/Spinner";
 import getData from "../../utils/api"; // we'll use this api function
 
-export default function UsersList({setUser}) {
+export default function UsersList({user, setUser}) {
   // include state for an error object and an isLoading flag
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
   const [users, setUsers] = useState(null);
-  const [userIndex, setUserIndex] = useState(0);
-
-  function updateUserHandler(idx) {
-    setUserIndex(idx);
-    setUser(users[idx]);
-  }
 
   // update the effect to use the getData function
   useEffect(() => {
@@ -39,16 +32,15 @@ export default function UsersList({setUser}) {
     return <p><Spinner/> Loading users...</p>
   }
 
-  // this UI is unchanged
   return (
     <ul className="users items-list-nav">
-      {users.map((u, i) => (
+      {users.map(u => (
         <li
           key={u.id}
-          className={i === userIndex ? "selected" : null}>
+          className={u.id === user.id ? "selected" : null}>
           <button
             className="btn"
-            onClick={() => updateUserHandler(i)}>
+            onClick={() => setUser(u)}>
             {u.name}
           </button>
         </li>

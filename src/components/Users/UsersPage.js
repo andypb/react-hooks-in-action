@@ -8,7 +8,7 @@ export default function UsersPage () {
 
   return (
     <main className="users-page">
-      <UsersList setUser={setUser}/>
+      <UsersList user={user} setUser={setUser}/>
       <UserDetails user={user}/>
     </main>
   );
